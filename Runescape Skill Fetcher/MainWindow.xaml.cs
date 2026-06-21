@@ -15,6 +15,11 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using Microsoft.VisualBasic.FileIO;
 using System.IO;
+using System.Diagnostics;
+using CsvHelper;
+using CsvHelper.Configuration;
+using System.Globalization;
+using CsvHelper.Configuration.Attributes;
 
 
 namespace Runescape_Skill_Fetcher
@@ -29,6 +34,8 @@ namespace Runescape_Skill_Fetcher
             InitializeComponent();
         }
 
+        public record Spy(string Level);
+        
         public class PlayerStats
         { 
             public string agility = "";
@@ -81,12 +88,6 @@ namespace Runescape_Skill_Fetcher
             string username = PlayerUsername.Text;
         }
 
-        public class HiscoreEntry
-        {
-            public int Rank { get; set; }
-            public int Level { get; set; }
-            public int Experience { get; set; }
-        }
 
         public async void FetchStatsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -104,31 +105,65 @@ namespace Runescape_Skill_Fetcher
             }
         }
 
+
         public async Task FetchStats(string username)
         {
             try
             {
 
                 string stats = await ApiClient.GetPlayerStats(username);
-                // Display CSV data in the PlayerStatsDisplay
-                using (StringReader stringReader = new StringReader(stats))
+                
 
-                using (TextFieldParser parser = new TextFieldParser(stringReader))
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
-                    parser.TextFieldType = FieldType.Delimited;
-                    parser.SetDelimiters(",");
-                    parser.HasFieldsEnclosedInQuotes = false;
+                    HasHeaderRecord = false,
+                    MissingFieldFound = null,
+                };
 
-                    while (!parser.EndOfData)
+                using var reader = new StringReader(stats);
+                using var csv = new CsvReader(reader, config);
 
-                    {
-                        string[] fields = parser.ReadFields();
-                       
-                    }
+                var levels = new List<int>();
+                while (csv.Read())
+                {
+                    var level = csv.GetField<int>(1);
+                    levels.Add(level);
+                    
+
                 }
+                
+                string agility = $"Agility: {levels[17] }";
+                string attack = $"Attack: {levels[1]}";
+                string construction = $"Construction: {levels[23]}";
+                string cooking = $"Cooking: {levels[8]}";
+                string crafting = $"Crafting {levels[13]}";
+                string defence = $"Defence: {levels[2]}";
+                string farming = $"Farming: {levels[20]}";
+                string firemaking = $"Firemaking: {levels[12]}";
+                string fishing = $"Fishing: {levels[11]}";
+                string fletching = $"Fletching: {levels[10]}";
+                string herblore = $"Herblore: {levels[16]}";
+                string hitpoints = $"Hitpoints: {levels[4]}";
+                string hunter = $"Hunter: {levels[22]}";
+                string magic = $"Magic: {levels[7]}";
+                string mining = $"Mining: {levels[15]}";
+                string prayer = $"Prayer: {levels[6]}";
+                string ranged = $"Ranged: {levels[5]}";
+                string runecrafting = $"Runecrafting: {levels[21]}";
+                string sailing = $"Sailing: {levels[24]}";
+                string slayer = $"Slayer: {levels[19]}";
+                string smithing = $"Smithing: {levels[14]}";
+                string strength = $"Strength: {levels[3]}";
+                string thieving = $"Thieving: {levels[18]}";
+                string woodcutting = $"Woodcutting: {levels[9]}";
+                
+                
+                string[] levelsStringDisplay = { agility, attack, construction, cooking, crafting };
+                PlayerStatsDisplay_Text(levelsStringDisplay[1]);
+                    
 
+                
 
-                PlayerStatsDisplay_Text(stats);
             }
             catch (HttpRequestException ex)
             {
