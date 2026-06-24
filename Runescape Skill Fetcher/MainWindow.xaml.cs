@@ -108,6 +108,8 @@ namespace Runescape_Skill_Fetcher
 
         public async Task FetchStats(string username)
         {
+            //This part of the code is going to assign to the string 'stats' the results from ApiClient.GetPlayerStats
+            //Then it is going to parse through the CSV data and assign to strings for each skill. May need to clean up later.
             try
             {
 
@@ -157,12 +159,22 @@ namespace Runescape_Skill_Fetcher
                 string thieving = $"Thieving: {levels[18]}";
                 string woodcutting = $"Woodcutting: {levels[9]}";
                 
-                
-                string[] levelsStringDisplay = { agility, attack, construction, cooking, crafting };
-                PlayerStatsDisplay_Text(levelsStringDisplay[1]);
-                    
+                //the following is used to set up the RichTextBoxDisplay
+                string[] levelsStringDisplayArray = { agility, attack, construction, cooking, crafting, defence, farming, firemaking, fishing, fletching, herblore, hitpoints, hunter,
+                                                      magic, mining, prayer, ranged, runecrafting, sailing, slayer, smithing, strength, thieving, woodcutting};
 
+                string levelsStringDisplay = $"{levelsStringDisplayArray[0]}\n{levelsStringDisplayArray[1]}\n{levelsStringDisplayArray[2]}\n{levelsStringDisplayArray[3]}\n{levelsStringDisplayArray[4]}" +
+                                             $"\n{levelsStringDisplayArray[5]}\n{levelsStringDisplayArray[6]}\n{levelsStringDisplayArray[7]}\n{levelsStringDisplayArray[8]}" +
+                                             $"\n{levelsStringDisplayArray[9]}\n{levelsStringDisplayArray[10]}\n{levelsStringDisplayArray[11]}\n{levelsStringDisplayArray[12]}" +
+                                             $"\n{levelsStringDisplayArray[13]}\n{levelsStringDisplayArray[14]}\n{levelsStringDisplayArray[15]}\n{levelsStringDisplayArray[16]}" +
+                                             $"\n{levelsStringDisplayArray[17]}\n{levelsStringDisplayArray[18]}\n{levelsStringDisplayArray[19]}\n{levelsStringDisplayArray[20]}" +
+                                             $"\n{levelsStringDisplayArray[21]}\n{levelsStringDisplayArray[22]}\n{levelsStringDisplayArray[23]}";
+                PlayerStatsDisplay_Text(levelsStringDisplay);
                 
+
+
+
+
 
             }
             catch (HttpRequestException ex)
