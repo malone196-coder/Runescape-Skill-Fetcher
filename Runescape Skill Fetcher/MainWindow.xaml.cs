@@ -163,12 +163,17 @@ namespace Runescape_Skill_Fetcher
                 string[] levelsStringDisplayArray = { agility, attack, construction, cooking, crafting, defence, farming, firemaking, fishing, fletching, herblore, hitpoints, hunter,
                                                       magic, mining, prayer, ranged, runecrafting, sailing, slayer, smithing, strength, thieving, woodcutting};
 
-                string levelsStringDisplay = $"{levelsStringDisplayArray[0]}\n{levelsStringDisplayArray[1]}\n{levelsStringDisplayArray[2]}\n{levelsStringDisplayArray[3]}\n{levelsStringDisplayArray[4]}" +
-                                             $"\n{levelsStringDisplayArray[5]}\n{levelsStringDisplayArray[6]}\n{levelsStringDisplayArray[7]}\n{levelsStringDisplayArray[8]}" +
-                                             $"\n{levelsStringDisplayArray[9]}\n{levelsStringDisplayArray[10]}\n{levelsStringDisplayArray[11]}\n{levelsStringDisplayArray[12]}" +
-                                             $"\n{levelsStringDisplayArray[13]}\n{levelsStringDisplayArray[14]}\n{levelsStringDisplayArray[15]}\n{levelsStringDisplayArray[16]}" +
-                                             $"\n{levelsStringDisplayArray[17]}\n{levelsStringDisplayArray[18]}\n{levelsStringDisplayArray[19]}\n{levelsStringDisplayArray[20]}" +
-                                             $"\n{levelsStringDisplayArray[21]}\n{levelsStringDisplayArray[22]}\n{levelsStringDisplayArray[23]}";
+
+
+                string levelsStringDisplay = $"{levelsStringDisplayArray[1]}\t{levelsStringDisplayArray[11]}\t{levelsStringDisplayArray[14]}\n" +
+                                             $"{levelsStringDisplayArray[21]}\t{levelsStringDisplayArray[0]}\t{levelsStringDisplayArray[20]}\n" +
+                                             $"{levelsStringDisplayArray[5]}\t{levelsStringDisplayArray[10]}\t{levelsStringDisplayArray[8]}\n" +
+                                             $"{levelsStringDisplayArray[16]}\t{levelsStringDisplayArray[22]}\t{levelsStringDisplayArray[3]}\n" +
+                                             $"{levelsStringDisplayArray[15]}\t{levelsStringDisplayArray[4]}\t{levelsStringDisplayArray[7]}\n" +
+                                             $"{levelsStringDisplayArray[13]}\t{levelsStringDisplayArray[9]}\t{levelsStringDisplayArray[23]}\n" +
+                                             $"{levelsStringDisplayArray[17]}\t{levelsStringDisplayArray[19]}\t{levelsStringDisplayArray[6]}\n" +
+                                             $"{levelsStringDisplayArray[2]}\t{levelsStringDisplayArray[12]}\t{levelsStringDisplayArray[18]}"
+                ;
                 PlayerStatsDisplay_Text(levelsStringDisplay);
                 
 
